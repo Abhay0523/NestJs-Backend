@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Put, Param, Get } from '@nestjs/common';
+import { Body, Controller, Post, Put, Param, Get, UnauthorizedException } from '@nestjs/common';
 import { EmployeeService } from './employee.service';
 import { CreateEmployeeDto } from './dto/employee-createDTO';
 import { UpdateEmployeeDto } from './dto/employee-update.DTO';
@@ -32,13 +32,14 @@ export class EmployeeController {
   async employeeLogin(@Body() employeeLoginDto: LoginDTO) {
     const { emp_code, dob } = employeeLoginDto;
     const employee = await this.employeeService.findOnes(emp_code);
-
+  
     if (employee && employee.DOB === dob) {
-      
+      // console.log(employee);
       return { message: 'Login successful', employee };
     } else {
-      return { message: 'Invalid credentials' };
+      throw new UnauthorizedException('Invalid credentials');
     }
   }
+  
 
 }

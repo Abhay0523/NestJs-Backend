@@ -13,66 +13,50 @@ export class PunchService {
     private employeeRepository: Repository<Employee>,
   ) { }
 
-  // Punch In
+
   async punchIn(emp_code: string): Promise<Punch> {
     const employee = await this.employeeRepository.findOne({ where: { emp_code } });
-  
+
     if (!employee) {
       throw new NotFoundException(`Employee with emp_code ${emp_code} not found`);
     }
-  
-    const punch = new Punch();  
+
+    const punch = new Punch();
     punch.emp = employee;
-  
-    
+
+
     const utcDate = new Date();
-    const istOffset = 5.5 * 60 * 60 * 1000; 
+    const istOffset = 5.5 * 60 * 60 * 1000;
     const istDate = new Date(utcDate.getTime() + istOffset);
-  
+
     punch.punch_in_time = istDate;
-  
+
     return this.punchRepository.save(punch);
   }
-  
-  
-  
-
 
   async punchOut(emp_code: string): Promise<Punch> {
     const employee = await this.employeeRepository.findOne({ where: { emp_code } });
-  
     if (!employee) {
       throw new NotFoundException(`Employee with emp_code ${emp_code} not found`);
     }
-  
     const lastPunch = await this.punchRepository.findOne({
       where: { emp: employee, punch_out_time: null },
       order: { punch_in_time: 'DESC' },
     });
-  
     if (!lastPunch) {
       throw new NotFoundException(`No punch-in record found for employee ${emp_code}`);
     }
-  
-    // Get current UTC time and convert to IST for punch-out
     const utcDate = new Date();
-    const istOffset = 5.5 * 60 * 60 * 1000; // IST is UTC+5:30 in milliseconds
+    const istOffset = 5.5 * 60 * 60 * 1000;
     lastPunch.punch_out_time = new Date(utcDate.getTime() + istOffset);
-  
+
     return this.punchRepository.save(lastPunch);
   }
-  
 
   async findAllPunches(): Promise<Punch[]> {
     return this.punchRepository.find({ relations: ['emp'] });
   }
 
 
-  // async findPunchesByEmployee(emp_code: string): Promise<Punch[]> {
-  //   const employee = await this.employeeRepository.findOne({ where: { emp_code } });
-  //   if (!employee) {
-  //     throw new NotFoundException(`Employee with emp_code ${emp_code} not found`);
-  //   }
-  //   return this.punchRepository.find({ where: { emp: employee } });
-  // }
+
 }

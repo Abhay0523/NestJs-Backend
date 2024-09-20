@@ -16,15 +16,7 @@ export class AdminService {
     return this.adminRepository.save(admin);
   }
 
-  async findAll(): Promise<Admin[]> {
-    return this.adminRepository.find();
-  }
+  
 
-  async findOne(id: number): Promise<Admin> {
-    const admin = await this.adminRepository.findOneBy({ id });
-    if (!admin) {
-      throw new NotFoundException('Admin not found');
-    }
-    return admin;
-  }
+ 
 }
