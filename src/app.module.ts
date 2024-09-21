@@ -6,6 +6,7 @@ import { Admin } from './admin/admin.entity';
 import { EmployeeModule } from './employee/employee.module';
 import { PunchModule } from './punch/punch.module';
 import { AdminModule } from './admin/admin.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { AdminModule } from './admin/admin.module';
     }),
     EmployeeModule,
     PunchModule, 
-    AdminModule, 
+    AdminModule, AuthModule, 
   ],
   controllers: [],
   providers: [],
