@@ -5,6 +5,7 @@ import { Punch } from './punch.entity';
 @Controller('punch')
 export class PunchController {
   constructor(private readonly punchService: PunchService) { }
+  
 
   @Post('in/:emp_code')
   punchIn(@Param('emp_code') emp_code: string): Promise<Punch> {
@@ -21,8 +22,7 @@ export class PunchController {
     return this.punchService.findAllPunches();
   }
 
-  
-
+ 
 
 
 

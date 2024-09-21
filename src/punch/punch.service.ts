@@ -53,6 +53,8 @@ export class PunchService {
     return this.punchRepository.save(lastPunch);
   }
 
+
+
   async findAllPunches(): Promise<Punch[]> {
     return this.punchRepository.find({ relations: ['emp'] });
   }

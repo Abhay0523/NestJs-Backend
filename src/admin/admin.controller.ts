@@ -6,10 +6,10 @@ import { CreateAdminDto } from './dto/admin-create.DTO';
 export class AdminController {
   constructor(private readonly adminService: AdminService) {}
 
-  @Post()
-  create(@Body() createAdminDto: CreateAdminDto) {
-    return this.adminService.createAdmin(createAdminDto);
-  }
+  // @Post()
+  // create(@Body() createAdminDto: CreateAdminDto) {
+  //   return this.adminService.createAdmin(createAdminDto);
+  // }
 
   
 

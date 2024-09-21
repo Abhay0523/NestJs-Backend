@@ -11,10 +11,10 @@ export class AdminService {
     private readonly adminRepository: Repository<Admin>,
   ) {}
 
-  async createAdmin(createAdminDto: CreateAdminDto): Promise<Admin> {
-    const admin = this.adminRepository.create(createAdminDto);
-    return this.adminRepository.save(admin);
-  }
+  // async createAdmin(createAdminDto: CreateAdminDto): Promise<Admin> {
+  //   const admin = this.adminRepository.create(createAdminDto);
+  //   return this.adminRepository.save(admin);
+  // }
 
   
 

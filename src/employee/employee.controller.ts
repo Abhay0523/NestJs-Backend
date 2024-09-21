@@ -34,7 +34,7 @@ export class EmployeeController {
     const employee = await this.employeeService.findOnes(emp_code);
   
     if (employee && employee.DOB === dob) {
-      // console.log(employee);
+     
       return { message: 'Login successful', employee };
     } else {
       throw new UnauthorizedException('Invalid credentials');
