@@ -28,18 +28,18 @@ export class EmployeeController {
     return this.employeeService.findOnes(emp_code);
   }
 
-  @Post('employee-login')
-  async employeeLogin(@Body() employeeLoginDto: LoginDTO) {
-    const { emp_code, dob } = employeeLoginDto;
-    const employee = await this.employeeService.findOnes(emp_code);
+  // @Post('employee-login')
+  // async employeeLogin(@Body() employeeLoginDto: LoginDTO) {
+  //   const { emp_code, dob } = employeeLoginDto;
+  //   const employee = await this.employeeService.findOnes(emp_code);
   
-    if (employee && employee.DOB === dob) {
+  //   if (employee && employee.DOB === dob) {
      
-      return { message: 'Login successful', employee };
-    } else {
-      throw new UnauthorizedException('Invalid credentials');
-    }
-  }
-  
+  //     return { message: 'Login successful', employee };
+  //   } else {
+  //     throw new UnauthorizedException('Invalid credentials');
+  //   }
+  // }
+    
 
 }
