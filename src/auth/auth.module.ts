@@ -8,7 +8,7 @@ import { PassportModule } from '@nestjs/passport';
 
 @Module({
   imports: [
-    PassportModule, // Add PassportModule here
+    PassportModule, 
     JwtModule.register({
       secret: '$3cr3@+|<3y', 
       signOptions: { expiresIn: '300s' }, 
