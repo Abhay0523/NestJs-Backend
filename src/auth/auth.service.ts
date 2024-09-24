@@ -6,7 +6,7 @@ import { JwtPayload } from './jwt-payload.interface';
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly jwtService: JwtService, //Create & Validate the JWT token 
+    private readonly jwtService: JwtService, 
     private readonly employeeService: EmployeeService,
   ) {}
 
