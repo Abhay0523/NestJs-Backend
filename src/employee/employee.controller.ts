@@ -1,8 +1,8 @@
-import { Body, Controller, Post, Put, Param, Get, UnauthorizedException } from '@nestjs/common';
+import { Body, Controller, Post, Put, Param, Get } from '@nestjs/common';
 import { EmployeeService } from './employee.service';
 import { CreateEmployeeDto } from './dto/employee-createDTO';
 import { UpdateEmployeeDto } from './dto/employee-update.DTO';
-import { LoginDTO } from './dto/employee-login.DTO';
+
 
 @Controller('employees')
 export class EmployeeController {
@@ -27,6 +27,7 @@ export class EmployeeController {
   findOne(@Param('emp_code') emp_code: string) {
     return this.employeeService.findOnes(emp_code);
   }
+  
 
   // @Post('employee-login')
   // async employeeLogin(@Body() employeeLoginDto: LoginDTO) {

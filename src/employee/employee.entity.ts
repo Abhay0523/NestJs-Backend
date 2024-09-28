@@ -5,7 +5,7 @@ export class Employee {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true })
+  @Column({ nullable:true, unique:true })
   emp_code: string;
 
   @Column({ unique: true })
@@ -26,7 +26,7 @@ export class Employee {
   @Column({ type: 'date', nullable: true })
   date_of_leaving: Date;
 
-  @Column({ type: 'date' })
+  @Column({ type: 'date', nullable:true })
   created_date: Date;
 
   @Column({ type: 'boolean' })

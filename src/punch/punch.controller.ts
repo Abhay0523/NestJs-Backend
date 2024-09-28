@@ -12,6 +12,7 @@ export class PunchController {
   punchIn(@Request() req): Promise<Punch> {
    
     const emp_code = req.user.emp_code;
+    console.log(req);
      
     return this.punchService.punchIn(emp_code);
   }
