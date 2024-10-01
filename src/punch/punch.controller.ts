@@ -1,4 +1,4 @@
-import { Controller, Post, Get, Request, UseGuards } from '@nestjs/common';
+import { Controller, Post, Get, Request, UseGuards, Param, Req } from '@nestjs/common';
 import { PunchService } from './punch.service';
 import { Punch } from './punch.entity';
 import { JwtAuthGuard } from '../auth/JwtAuthGuard';
@@ -29,4 +29,11 @@ export class PunchController {
   findAll(): Promise<Punch[]> {
     return this.punchService.findAllPunches();
   }
+
+  // @UseGuards(JwtAuthGuard)
+  @Get("emp/:emp_code")
+  findbyID(@Param('emp_code') emp_code: string): Promise<Punch[]> {
+    return this.punchService.findOnes(emp_code);
+  }
+
 }

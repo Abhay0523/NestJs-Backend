@@ -13,7 +13,7 @@ export class PunchService {
     private employeeRepository: Repository<Employee>,
   ) { }
 
-  
+
   async punchIn(emp_code: string): Promise<Punch> {
     const employee = await this.employeeRepository.findOne({ where: { emp_code } });
 
@@ -25,7 +25,7 @@ export class PunchService {
     punch.emp = employee;
 
     const utcDate = new Date();
-    const istOffset = 5.5 * 60 * 60 * 1000; 
+    const istOffset = 5.5 * 60 * 60 * 1000;
     const istDate = new Date(utcDate.getTime() + istOffset);
 
     punch.punch_in_time = istDate;
@@ -33,15 +33,15 @@ export class PunchService {
     return this.punchRepository.save(punch);
   }
 
- 
+
   async punchOut(emp_code: string): Promise<Punch> {
     const employee = await this.employeeRepository.findOne({ where: { emp_code } });
     if (!employee) {
       throw new NotFoundException(`Employee with emp_code ${emp_code} not found`);
     }
-    
+
     const lastPunch = await this.punchRepository.findOne({
-      where: { emp: employee, punch_out_time: null }, 
+      where: { emp: employee, punch_out_time: null },
       order: { punch_in_time: 'DESC' },
     });
 
@@ -50,7 +50,7 @@ export class PunchService {
     }
 
     const utcDate = new Date();
-    const istOffset = 5.5 * 60 * 60 * 1000; 
+    const istOffset = 5.5 * 60 * 60 * 1000;
     lastPunch.punch_out_time = new Date(utcDate.getTime() + istOffset);
 
     return this.punchRepository.save(lastPunch);
@@ -59,5 +59,14 @@ export class PunchService {
 
   async findAllPunches(): Promise<Punch[]> {
     return this.punchRepository.find({ relations: ['emp'] });
+  }
+
+  async findOnes(emp_code: string): Promise<Punch[]> {
+    const employee = await this.employeeRepository.findOne({ where: { emp_code } });
+    if (!employee) {
+      throw new NotFoundException(`Employee with emp_code ${emp_code} not found`);
+    }
+
+    return this.punchRepository.find({ where: { emp: employee }, relations: ['emp'] });
   }
 }

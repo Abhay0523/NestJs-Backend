@@ -29,6 +29,12 @@ export class EmployeeController {
   }
   
 
+  @Get('/raw/query')
+  Rawqu(){
+    console.log('Rawqu method triggered'); 
+    return this.employeeService.RawQuery();
+  }
+
   // @Post('employee-login')
   // async employeeLogin(@Body() employeeLoginDto: LoginDTO) {
   //   const { emp_code, dob } = employeeLoginDto;
